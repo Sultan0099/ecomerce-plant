@@ -31,3 +31,15 @@ export const singleProduct = async (productId) => {
         return { err: true, error }
     }
 }
+
+
+export const searchProduct = async (searchQuery) => {
+    try {
+        const res = await axios.post(`http://localhost:2019/products/search`, { searchQuery })
+
+        return { err: false, res }
+    } catch (error) {
+        console.log(error)
+        return { err: true, error }
+    }
+}

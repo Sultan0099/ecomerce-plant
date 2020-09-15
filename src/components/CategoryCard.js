@@ -13,7 +13,7 @@ const CategoryCard = (props) => {
     const { img, name, count } = props;
     return (
 
-        <TouchableOpacity activeOpacity={0.25} onPress={() => props.navigation.replace('Products', { category: name.toLowerCase() })}>
+        <TouchableOpacity activeOpacity={0.25} onPress={() => props.navigation.navigate('Products', { category: name.toLowerCase() })}>
             <Card center middle shadow style={styles.category}>
                 <Badge
                     margin={[0, 0, 15]}

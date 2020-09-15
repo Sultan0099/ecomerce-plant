@@ -1,14 +1,25 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Button, Text } from "../components/common"
 import { theme } from '../constants';
-
+import { logout } from "../redux/actions/auth"
 
 const AccountScreen = (props) => {
-
     const user = useSelector(state => state.auth.user);
+
+    const dispatch = useDispatch();
+
+    const handleLogout = async () => {
+        try {
+            await dispatch(logout())
+
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
 
     if (user) {
         return (
@@ -19,6 +30,11 @@ const AccountScreen = (props) => {
                 <Button style={styles.button} onPress={() => props.navigation.navigate("Auth")}>
                     <Text center color={theme.colors.white}>
                         Login with Another Account
+                    </Text>
+                </Button>
+                <Button style={styles.button} onPress={handleLogout}>
+                    <Text center color={theme.colors.white}>
+                        LOG OUT
                     </Text>
                 </Button>
             </View>
@@ -32,6 +48,7 @@ const AccountScreen = (props) => {
                     LOGIN / REGISTER
                </Text>
             </Button>
+
         </View>
     )
 }

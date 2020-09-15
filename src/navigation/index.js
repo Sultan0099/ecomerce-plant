@@ -16,6 +16,7 @@ import Icon from "react-native-vector-icons/AntDesign"
 import { theme } from '../constants';
 import SearchScreen from "../screens/SearchScreen";
 import ProductDetailScreen from "../screens/ProductDetailScreen";
+import OrderScreen from "../screens/OrderScreen";
 
 
 const defaultHeaderStyle = {
@@ -55,7 +56,9 @@ const HomeNavigator = createStackNavigator({
     Search: {
         screen: SearchScreen
     },
-
+    Order: {
+        screen: OrderScreen
+    }
 
 }, {
     defaultNavigationOptions: {
@@ -113,6 +116,7 @@ const TabNavigator = createMaterialBottomTabNavigator({
     }
 }, {
     initialRouteName: "Home",
+    shifting: true,
     barStyle: { backgroundColor: theme.colors.dark }
 })
 

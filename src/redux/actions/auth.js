@@ -70,12 +70,21 @@ export const getUserWithToken = () => async dispatch => {
 
 
   } catch (err) {
-    console.log({ err });
     if (err) {
-      console.log(err.response.data.message);
-
+      await AsyncStorage.removeItem("token")
       return { err: true, msg: err.response.data.message };
     }
 
+  }
+}
+
+
+export const logout = () => async dispatch => {
+  try {
+    await AsyncStorage.removeItem("token")
+
+    await dispatch({ type: SET_USER, payload: { user: null, token: null } })
+  } catch (err) {
+    console.log(err)
   }
 }

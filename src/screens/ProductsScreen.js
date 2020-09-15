@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { FlatList, StyleSheet } from 'react-native'
+import { FlatList, StyleSheet, ActivityIndicator } from 'react-native'
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -45,7 +45,7 @@ const ProductsScreen = (props) => {
     }
 
     return (
-        <Block>
+        <Block color={theme.colors.white}>
             <Block flex={false} row color={theme.colors.dark} space="between" style={styles.header}>
                 <Block center middle flex={false} color={theme.colors.dark} style={styles.headerLeft}>
                     <TouchableOpacity onPress={() => navigation.replace("Category")}>
@@ -59,7 +59,7 @@ const ProductsScreen = (props) => {
                     </Button>
                 </Block>
             </Block>
-            { loading ? <Text>Fetching......</Text> : <Block center style={{ marginTop: 10 }}>
+            { loading ? <ActivityIndicator size="large" color={theme.colors.secondary} /> : <Block center style={{ marginTop: 10 }}>
                 <FlatList
                     style={{ width: "100%" }}
                     data={products}
