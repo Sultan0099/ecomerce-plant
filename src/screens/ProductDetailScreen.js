@@ -2,17 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { Image, StyleSheet, Dimensions, ActivityIndicator } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 import { Block, Text, Button } from '../components/common'
 import { theme } from '../constants'
+import { addToCart } from '../redux/actions/cart';
 import { singleProduct } from "../redux/actions/products"
 
 const { height } = Dimensions.get("screen")
 
 const ProductDetailScreen = (props) => {
     const { navigation } = props;
+    const dispatch = useDispatch();
     const productId = navigation.getParam("productId");
     const user = useSelector(state => state.auth.user)
 
@@ -36,6 +38,15 @@ const ProductDetailScreen = (props) => {
     const handleNavigation = () => {
         if (user) {
             navigation.navigate("Order")
+        } else {
+            navigation.navigate("Auth")
+        }
+    }
+
+    const handleAddToCart = async () => {
+        if (user) {
+            const data = await dispatch(addToCart({ product: productId, price: product.price, quantity: 1 }));
+            console.log(data)
         } else {
             navigation.navigate("Auth")
         }
@@ -82,7 +93,7 @@ const ProductDetailScreen = (props) => {
                     </Button>
                     <Button gradient
                         style={{ width: 200, paddingVertical: 3, paddingHorizontal: 10, borderRadius: 40 }}
-                        onPress={handleNavigation}
+                        onPress={handleAddToCart}
                     >
                         <Text white h2 center>
                             Add To Cart

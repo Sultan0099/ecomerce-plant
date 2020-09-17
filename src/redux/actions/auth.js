@@ -62,19 +62,20 @@ export const getUserWithToken = () => async dispatch => {
     });
 
 
-    await AsyncStorage.setItem("token", res.data.token)
+    if (res) {
+      await AsyncStorage.setItem("token", res.data.token)
 
-    await dispatch({ type: SET_USER, payload: { user: res.data.user, token: res.data.token } })
+      await dispatch({ type: SET_USER, payload: { user: res.data.user, token: res.data.token } })
 
-    return { err: false, user: res.data }
-
-
-  } catch (err) {
-    if (err) {
+      return { err: false, user: res }
+    } else {
       await AsyncStorage.removeItem("token")
-      return { err: true, msg: err.response.data.message };
+      return { err: true, msg: "err" }
     }
 
+  } catch (err) {
+    await AsyncStorage.removeItem("token")
+    return { err: true, msg: err };
   }
 }
 
