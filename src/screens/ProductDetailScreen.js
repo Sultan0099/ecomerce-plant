@@ -3,7 +3,7 @@ import { Image, StyleSheet, Dimensions, ActivityIndicator } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { useDispatch, useSelector } from 'react-redux';
-
+import { showMessage } from "react-native-flash-message";
 
 import { Block, Text, Button } from '../components/common'
 import { theme } from '../constants'
@@ -37,7 +37,7 @@ const ProductDetailScreen = (props) => {
 
     const handleNavigation = () => {
         if (user) {
-            navigation.navigate("Order")
+            navigation.navigate("Order", { itemsToBuy: [productId] })
         } else {
             navigation.navigate("Auth")
         }
@@ -46,7 +46,10 @@ const ProductDetailScreen = (props) => {
     const handleAddToCart = async () => {
         if (user) {
             const data = await dispatch(addToCart({ product: productId, price: product.price, quantity: 1 }));
-            console.log(data)
+            showMessage({
+                message: "Item Added To Cart",
+                type: "info",
+            });
         } else {
             navigation.navigate("Auth")
         }

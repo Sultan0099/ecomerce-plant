@@ -4,6 +4,8 @@ import React from 'react';
 import { createStore, applyMiddleware, compose } from "redux";
 import { Provider, useDispatch } from "react-redux";
 import thunk from 'redux-thunk';
+import FlashMessage from "react-native-flash-message";
+
 
 import rootReducer from './src/redux/reducers';
 import MyApp from './src/MyApp';
@@ -18,6 +20,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <MyApp />
+      <FlashMessage position="top" />
     </Provider>
   );
 };

@@ -21,6 +21,7 @@ const CartScreen = (props) => {
 
     const fetchCartItems = async () => {
         const res = await dispatch(getCartItems());
+        setLoading(false)
     }
 
 
@@ -32,7 +33,6 @@ const CartScreen = (props) => {
 
             }
             fetchCartItems()
-            setLoading(false)
         });
 
         return () => {
@@ -44,10 +44,8 @@ const CartScreen = (props) => {
         if (!user) {
             setLoading(false)
             return
-
         }
         fetchCartItems()
-        setLoading(false)
     }, [])
 
     const handleShowPrice = (productId) => {
@@ -134,7 +132,8 @@ const CartScreen = (props) => {
             </Button>
         </Block>
     )
-    { totalPrice(selectedProduct) }
+
+
     return (
         <Block flex={false} color={"rgba(0,0,0,0.100)"}>
 
@@ -144,13 +143,21 @@ const CartScreen = (props) => {
                 renderItem={_renderCard}
                 keyExtractor={item => item.product}
                 numColumns={1}
+                refreshing={loading}
+                onRefresh={fetchCartItems}
             />
             <Block flex={false} center style={{ height: "19%", marginTop: 5, backgroundColor: theme.colors.white }}>
                 <Text h1 bold secondary >
                     <Text caption gray> Total : </Text>
                     {totalPrice(selectedProduct)}
                 </Text>
-                <Button gradient style={{ width: "80%", justifyContent: "center", alignItems: 'center' }} >
+                <Button gradient style={{ width: "80%", justifyContent: "center", alignItems: 'center' }}
+                    onPress={() => {
+                        console.log(selectedProduct)
+                        if (selectedProduct.length > 0) {
+                            return navigation.navigate("Order", { itemsToBuy: [...selectedProduct] })
+                        } else return
+                    }}>
                     <Text white bold >
                         BUY NOW
                     </Text>

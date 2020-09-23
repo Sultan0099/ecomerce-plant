@@ -1,6 +1,41 @@
+import AsyncStorage from "@react-native-community/async-storage";
 import axios from "axios";
 
 import { SET_ORDERS, UPDATE_STATUS } from "../_actionsTypes"
+
+export const createOrders = async (buyerId, productId, orderData) => {
+    try {
+
+        const data = {
+            buyer: buyerId,
+            product: productId,
+            buyerAddress: {
+                fullName: orderData.fullName,
+                mobileNumber: orderData.mobileNumber,
+                pinCode: "0000",
+                locality: "pakistan",
+                address: orderData.address.toLowerCase(),
+                cityDistrictTown: orderData.city,
+                province: orderData.provinceName,
+                landmark: orderData.landmark ? orderData.landmark : ''
+            },
+            paymentType: "cash on delivery",
+            paymentStatus: "not paid"
+        }
+
+        const token = await AsyncStorage.getItem("token");
+        const res = await axios.post('http://localhost:2019/order/create', data, {
+            headers: {
+                authorization: `Bearer ${token}`
+            }
+        })
+
+        return res;
+    } catch (err) {
+        console.log(err)
+    }
+}
+
 
 export const getOrders = (userId) => async dispatch => {
     try {

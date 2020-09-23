@@ -31,9 +31,6 @@ const CartCard = (props) => {
     }
 
     return (
-
-
-
         <Block flex={false} row style={styles.card}>
             <Block flex={false} center middle style={styles.cardAction} >
                 <Button
@@ -52,16 +49,14 @@ const CartCard = (props) => {
             </Block>
             <Block flex={false} style={styles.cardContent}>
                 <Block flex={false} style={styles.cardContentTop}>
-                    <Text h2  >{name.toUpperCase()}</Text>
+                    <Text h2  >{name}</Text>
                     <Text caption gray2 bold> {category} </Text>
                 </Block>
                 <Block flex={false} row space="between" style={styles.cardContentBottom}>
                     <Text h1 bold primary> ${price} </Text>
                     <Block flex={false} row center style={styles.cardContentAction}>
                         <TouchableOpacity style={{ padding: 3 }}
-                            onPress={() => {
-                                return increaseQuantity(productId)
-                            }}>
+                            onPress={() => increaseQuantity(productId)}>
                             <Icon name="plus" size={20} />
                         </TouchableOpacity>
                         <Block
@@ -73,16 +68,13 @@ const CartCard = (props) => {
                             <Text> {quantity} </Text>
                         </Block>
                         <TouchableOpacity style={{ padding: 3 }}
-                            onPress={() => {
-                                return decreaseQuantity(productId)
-                            }}>
+                            onPress={() => decreaseQuantity(productId)}>
                             <Icon name="minus" size={20} />
                         </TouchableOpacity>
                     </Block>
                 </Block>
             </Block>
         </Block>
-
     )
 }
 
