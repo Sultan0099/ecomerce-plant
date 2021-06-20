@@ -4,7 +4,7 @@ import { SET_PRODUCTS, CREATE_PRODUCT, DELETE_PRODUCT } from "../_actionsTypes";
 
 export const getProducts = (category) => async dispatch => {
     try {
-        const res = await axios.get(`http://localhost:2019/products/${category}`);
+        const res = await axios.get(`https://glacial-bayou-56103.herokuapp.com/products/${category}`);
 
         dispatch({ type: SET_PRODUCTS, payload: res.data.products });
 
@@ -23,7 +23,7 @@ export const getProducts = (category) => async dispatch => {
 
 export const singleProduct = async (productId) => {
     try {
-        const res = await axios.get(`http://localhost:2019/products/get-product/${productId}`)
+        const res = await axios.get(`https://glacial-bayou-56103.herokuapp.com/products/get-product/${productId}`)
 
         return { err: false, res }
     } catch (error) {
@@ -35,7 +35,7 @@ export const singleProduct = async (productId) => {
 
 export const searchProduct = async (searchQuery) => {
     try {
-        const res = await axios.post(`http://localhost:2019/products/search`, { searchQuery })
+        const res = await axios.post(`https://glacial-bayou-56103.herokuapp.com/products/search`, { searchQuery })
 
         return { err: false, res }
     } catch (error) {

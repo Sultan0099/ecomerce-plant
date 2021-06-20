@@ -2,7 +2,7 @@ import * as theme from "./theme";
 import * as mocks from "./mocks";
 
 
-const base_url = 'http://localhost:2019';
+const base_url = 'https://glacial-bayou-56103.herokuapp.com';
 export {
     theme,
     mocks,

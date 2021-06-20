@@ -24,7 +24,7 @@ export const createOrders = async (buyerId, productId, orderData) => {
         }
 
         const token = await AsyncStorage.getItem("token");
-        const res = await axios.post('http://localhost:2019/order/create', data, {
+        const res = await axios.post('https://glacial-bayou-56103.herokuapp.com/order/create', data, {
             headers: {
                 authorization: `Bearer ${token}`
             }
@@ -40,7 +40,7 @@ export const createOrders = async (buyerId, productId, orderData) => {
 export const getOrders = (userId) => async dispatch => {
     try {
         const token = localStorage.getItem('token');
-        const res = await axios.get(`http://localhost:2019/order/get-orders/seller/${userId}`, {
+        const res = await axios.get(`https://glacial-bayou-56103.herokuapp.com/order/get-orders/seller/${userId}`, {
             headers: {
                 authorization: `Bearer ${token}`
             }
@@ -57,7 +57,7 @@ export const getOrders = (userId) => async dispatch => {
 export const updateStatus = (orderId, status) => async dispatch => {
     try {
         const token = localStorage.getItem('token');
-        const res = await axios.patch(`http://localhost:2019/order/update-status/${orderId}/${status}`, {}, {
+        const res = await axios.patch(`https://glacial-bayou-56103.herokuapp.com/order/update-status/${orderId}/${status}`, {}, {
             headers: {
                 authorization: `Bearer ${token}`
             }

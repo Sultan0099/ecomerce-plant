@@ -7,7 +7,7 @@ import { SET_USER } from "../_actionsTypes";
 
 export const register = (userData) => async dispatch => {
   try {
-    const res = await axios.post(`http://localhost:2019/user/signup`, { ...userData });
+    const res = await axios.post(`https://glacial-bayou-56103.herokuapp.com/user/signup`, { ...userData });
 
 
     await AsyncStorage.setItem("token", res.data.token)
@@ -30,7 +30,7 @@ export const register = (userData) => async dispatch => {
 
 export const login = (userData) => async dispatch => {
   try {
-    const res = await axios.post(`http://localhost:2019/user/login`, { ...userData });
+    const res = await axios.post(`https://glacial-bayou-56103.herokuapp.com/user/login`, { ...userData });
 
     console.log(res)
 
@@ -55,7 +55,7 @@ export const login = (userData) => async dispatch => {
 export const getUserWithToken = () => async dispatch => {
   try {
     const token = await AsyncStorage.getItem("token")
-    const res = await axios.get(`http://localhost:2019/user/get`, {
+    const res = await axios.get(`https://glacial-bayou-56103.herokuapp.com/user/get`, {
       headers: {
         authorization: `Bearer ${token}`
       }
