@@ -21,6 +21,7 @@ const CartScreen = (props) => {
 
     const fetchCartItems = async () => {
         const res = await dispatch(getCartItems());
+        console.log('cart response', res)
         setLoading(false)
     }
 
